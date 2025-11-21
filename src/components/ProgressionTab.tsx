@@ -10,16 +10,22 @@ interface ProgressionTabProps {
 export const ProgressionTab: React.FC<ProgressionTabProps> = ({ character }) => {
   const originData = ORIGENS.find(o => o.nome === character.origem);
   const trackData = TRILHAS.find(t => t.nome === character.trilha);
+  const isSurvivor = character.classe === 'Sobrevivente';
+  const milestones = isSurvivor ? [2, 4] : [10, 40, 65, 99];
 
   const renderTrackAbility = (nex: number) => {
     const ability = trackData?.habilidades.find(h => h.nex === nex);
-    const isUnlocked = character.nex >= nex;
+    const isUnlocked = isSurvivor 
+        ? (character.estagio || 0) >= nex 
+        : character.nex >= nex;
+    
+    const label = isSurvivor ? `Estágio ${nex}` : `${nex}% NEX`;
 
     return (
-      <div className={`border-l-2 pl-4 py-2 relative ${isUnlocked ? 'border-ordem-green' : 'border-gray-800 opacity-50'}`}>
+      <div key={nex} className={`border-l-2 pl-4 py-2 relative ${isUnlocked ? 'border-ordem-green' : 'border-gray-800 opacity-50'}`}>
         <div className={`absolute -left-[9px] top-2 w-4 h-4 rounded-full border-2 ${isUnlocked ? 'bg-ordem-green border-ordem-green' : 'bg-black border-gray-800'}`}></div>
         <h4 className={`font-mono font-bold ${isUnlocked ? 'text-ordem-white' : 'text-gray-500'}`}>
-          {nex}% - {ability?.nome || '???'}
+          {label} - {ability?.nome || '???'}
         </h4>
         <p className="text-sm text-gray-400 mt-1">
           {ability?.descricao || 'Habilidade bloqueada.'}
@@ -85,10 +91,7 @@ export const ProgressionTab: React.FC<ProgressionTabProps> = ({ character }) => 
           </div>
 
           <div className="space-y-6 ml-2">
-            {renderTrackAbility(10)}
-            {renderTrackAbility(40)}
-            {renderTrackAbility(65)}
-            {renderTrackAbility(99)}
+            {milestones.map(m => renderTrackAbility(m))}
           </div>
         </div>
       </section>

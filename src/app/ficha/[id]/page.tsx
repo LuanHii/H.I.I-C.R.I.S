@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { subscribeToAgent } from '../../../core/firebase/firestore';
+import { subscribeToAgent, saveAgentToCloud } from '../../../core/firebase/firestore';
 import { Personagem } from '../../../core/types';
 import { AgentDetailView } from '../../../components/master/AgentDetailView';
 
@@ -28,6 +28,13 @@ export default function PlayerAgentPage() {
 
     return () => unsubscribe();
   }, [id]);
+
+  const handleUpdate = async (updatedAgent: Personagem) => {
+      // Allow updates from the player view (e.g. pending choices)
+      // We optimistically update local state (though subscription will overwrite it)
+      setAgent(updatedAgent);
+      await saveAgentToCloud(id, updatedAgent);
+  };
 
   if (loading) {
     return (
@@ -66,7 +73,7 @@ export default function PlayerAgentPage() {
         
         <AgentDetailView 
             agent={agent} 
-            onUpdate={() => {}}
+            onUpdate={handleUpdate}
             readOnly={true}
         />
       </div>

@@ -171,6 +171,11 @@ export interface Trilha {
     nex: number;
     nome: string;
     descricao: string;
+    escolha?: {
+      tipo: 'pericia' | 'elemento' | 'arma' | 'atributo' | 'ritual' | 'custom';
+      quantidade: number;
+      opcoes?: string[];
+    };
   }[];
   livro: 'Regras Básicas' | 'Sobrevivendo ao Horror';
 }
@@ -228,7 +233,18 @@ export interface Personagem {
   origem: string;
   nex: number;
   estagio?: number;
-  patente: Patente;
+  patente?: Patente;
+  pontosAtributoPendentes?: number; // Novo campo para controlar evolução
+  escolhaTrilhaPendente?: boolean; // Novo campo para escolha de trilha
+  habilidadesTrilhaPendentes?: {
+    trilha: string;
+    habilidade: string;
+    escolha: {
+      tipo: 'pericia' | 'elemento' | 'arma' | 'atributo' | 'ritual' | 'custom';
+      quantidade: number;
+      opcoes?: string[];
+    };
+  }[];
   trilha?: string;
   afinidade?: Elemento;
   atributos: Atributos;

@@ -12,7 +12,12 @@ export const TRILHAS: Trilha[] = [
       {
         nex: 10,
         nome: 'Carteirada',
-        descricao: 'Escolha Diplomacia ou Enganação. Você recebe treinamento na perícia escolhida ou, se já for treinado, recebe +2 nela. No início de cada missão, recebe documentos para auxiliar em testes de perícia social.'
+        descricao: 'Escolha Diplomacia ou Enganação. Você recebe treinamento na perícia escolhida ou, se já for treinado, recebe +2 nela. No início de cada missão, recebe documentos para auxiliar em testes de perícia social.',
+        escolha: {
+          tipo: 'custom',
+          quantidade: 1,
+          opcoes: ['Diplomacia', 'Enganação']
+        }
       },
       {
         nex: 40,
@@ -68,7 +73,11 @@ export const TRILHAS: Trilha[] = [
       {
         nex: 10,
         nome: 'Traços da Entidade',
-        descricao: 'Escolha um elemento paranormal. Recebe +2 em testes de ataque e rolagens de dano C.a.C, resistência 5 ao elemento e resistência 5 a três tipos de dano físico (balístico, corte, impacto ou perfuração). Soma Força ao PV total. Sofre –O em uma perícia social.'
+        descricao: 'Escolha um elemento paranormal. Recebe +2 em testes de ataque e rolagens de dano C.a.C, resistência 5 ao elemento e resistência 5 a três tipos de dano físico (balístico, corte, impacto ou perfuração). Soma Força ao PV total. Sofre –O em uma perícia social.',
+        escolha: {
+          tipo: 'elemento',
+          quantidade: 1
+        }
       },
       {
         nex: 40,
@@ -156,7 +165,12 @@ export const TRILHAS: Trilha[] = [
       {
         nex: 10,
         nome: 'Mascate',
-        descricao: 'Recebe treinamento em Profissão (armeiro, engenheiro ou químico, à escolha) e +5 na capacidade de carga. Ao fabricar item improvisado, DT é reduzida em –10.'
+        descricao: 'Recebe treinamento em Profissão (armeiro, engenheiro ou químico, à escolha) e +5 na capacidade de carga. Ao fabricar item improvisado, DT é reduzida em –10.',
+        escolha: {
+          tipo: 'custom',
+          quantidade: 1,
+          opcoes: ['Profissão (Armeiro)', 'Profissão (Engenheiro)', 'Profissão (Químico)']
+        }
       },
       {
         nex: 40,
@@ -226,7 +240,7 @@ export const TRILHAS: Trilha[] = [
       {
         nex: 4, // Estágio 4
         nome: 'Pancada Forte',
-        descricao: 'Quando faz um ataque, você pode gastar 1 PE para receber +O no teste de ataque. Se virar Combatente, reduz o custo de ativação de Ataque Especial em –1 PE.'
+        descricao: 'Quando faz um ataque, você pode gastar 1 PE para receber +O no teste de ataque. Se você se tornar um combatente, perde esta habilidade, mas reduz o custo de ativação de Ataque Especial em –1 PE.'
       }
     ],
     livro: 'Sobrevivendo ao Horror'
@@ -238,13 +252,21 @@ export const TRILHAS: Trilha[] = [
     habilidades: [
       {
         nex: 2, // Estágio 2
-        nome: 'Conhecimento Comum',
-        descricao: 'Permite usar o Intellecto em vez do atributo base para testes de perícia com Intuição, Tecnologia e Profissão.'
+        nome: 'Esperto',
+        descricao: 'Você se torna treinado em uma perícia adicional a sua escolha.',
+        escolha: {
+          tipo: 'pericia',
+          quantidade: 1
+        }
       },
       {
         nex: 4, // Estágio 4
-        nome: 'Na Ponta da Língua',
-        descricao: 'Uma vez por cena, pode gastar 1 PE para fazer um teste de Atualidades (DT 15). Se passar, recebe uma informação útil para essa cena.'
+        nome: 'Entendido',
+        descricao: 'Escolha duas perícias nas quais você é treinado (exceto Luta e Pontaria). Quando faz um teste de uma dessas perícias, você pode gastar 1 PE para somar +1d4 no resultado do teste. Se você se tornar um especialista, perde esta habilidade, mas reduz o custo de ativação de Perito em –1 PE.',
+        escolha: {
+          tipo: 'pericia',
+          quantidade: 2
+        }
       }
     ],
     livro: 'Sobrevivendo ao Horror'
@@ -256,13 +278,17 @@ export const TRILHAS: Trilha[] = [
     habilidades: [
       {
         nex: 2, // Estágio 2
-        nome: 'Personalidade Esotérica',
-        descricao: 'Você sempre teve uma afinidade com assuntos esotéricos. Você recebe +3 PE e recebe treinamento em Ocultismo. Se já for treinado nesta perícia, recebe +2 nela.'
+        nome: 'Esotérico',
+        descricao: 'Você pode gastar uma ação padrão e 1 PE para sentir energias paranormais em alcance curto. O mestre dirá quais informações você consegue obter, se houver.'
       },
       {
         nex: 4, // Estágio 4
-        nome: 'Sussurros do Outro Lado',
-        descricao: 'Você aprende o ritual Ouvir os Sussurros (1º Círculo).'
+        nome: 'Iniciado',
+        descricao: 'Você aprende e pode conjurar um ritual de 1º círculo a sua escolha. Se você se tornar um ocultista, soma este ritual aos três rituais que aprende com Escolhido pelo Outro Lado.',
+        escolha: {
+          tipo: 'ritual',
+          quantidade: 1
+        }
       }
     ],
     livro: 'Sobrevivendo ao Horror'
@@ -279,7 +305,11 @@ export const TRILHAS: Trilha[] = [
       {
         nex: 10,
         nome: 'A Favorita',
-        descricao: 'Escolha uma arma. A categoria da arma escolhida é reduzida em I.'
+        descricao: 'Escolha uma arma. A categoria da arma escolhida é reduzida em I.',
+        escolha: {
+          tipo: 'arma',
+          quantidade: 1
+        }
       },
       {
         nex: 40,

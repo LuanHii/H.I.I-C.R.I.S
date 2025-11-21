@@ -15,20 +15,17 @@ export const SessionManager: React.FC = () => {
   const [rodada, setRodada] = useState(1);
   const [selectedAgentId, setSelectedAgentId] = useState<string | null>(null);
 
-  // State for Modals and Session Data
   const [isThreatModalOpen, setIsThreatModalOpen] = useState(false);
   const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
   const [activeThreats, setActiveThreats] = useState<{instanceId: string, data: Ameaca, currentHP: number}[]>([]);
   const [activeAgentIds, setActiveAgentIds] = useState<string[]>([]);
 
-  // Initialize active agents
   useEffect(() => {
     if (fichas.length > 0 && activeAgentIds.length === 0) {
         setActiveAgentIds(fichas.map(f => f.id));
     }
   }, [fichas, activeAgentIds.length]);
 
-  // Auto-select first agent if none selected
   useEffect(() => {
     if (!selectedAgentId && activeAgentIds.length > 0) {
         setSelectedAgentId(activeAgentIds[0]);
@@ -81,8 +78,7 @@ export const SessionManager: React.FC = () => {
     const agentToShare = fichas.find(a => a.id === id);
     if (agentToShare) {
         try {
-            // Força o salvamento na nuvem antes de compartilhar
-            await saveAgentToCloud(id, agentToShare);
+            await saveAgentToCloud(id, agentToShare.personagem);
             
             const link = `${window.location.origin}/ficha/${id}`;
             navigator.clipboard.writeText(link).then(() => {
